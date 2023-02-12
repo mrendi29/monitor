@@ -31,8 +31,8 @@
 
             if (window["WebSocket"]) {
                 id = Math.random().toString(36).substr(2, 5);
-                id = "aaa"; // Test single client
-                conn = new WebSocket("ws://" + document.location.host + "/ws?client_id=" + id);
+                // id = "aaa"; // Test single client
+                conn = new WebSocket("ws://" + document.location.host + "/ws/" + id);
                 conn.onclose = function (evt) {
                     var item = document.createElement("div");
                     item.innerHTML = "<b>Connection closed.</b>";

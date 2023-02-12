@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"net/http"
 	"sync"
@@ -128,8 +129,10 @@ func serveWs(w http.ResponseWriter, r *http.Request) {
 	}
 
 	vars := mux.Vars(r)
-	log.Println(vars["client_id"])
+	log.Println(fmt.Printf("%+v\n", vars))
+	log.Println("Client id is: " + vars["client_id"])
 	client := &Client{conn: ws, ID: vars["client_id"], send: make(chan []byte, 256)}
+	log.Println(fmt.Printf("%+v\n", client))
 	h.register <- client
 
 	go client.writePump()
