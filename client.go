@@ -87,6 +87,8 @@ func (client *Client) readPump() {
 // write writes a message with the given message type and payload.
 func (client *Client) write(mt int, payload []byte) error {
 	client.conn.SetWriteDeadline(time.Now().Add(writeWait))
+	client.mu.Lock()
+	defer client.mu.Unlock()
 	return client.conn.WriteMessage(mt, payload)
 }
 
